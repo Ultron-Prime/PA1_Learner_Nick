@@ -1,0 +1,61 @@
+The suggested tab space size when viewing the .cpp file is 4.
+
+At the beginning of the program (proj1.cpp) is  a multi-line comment with the file name,
+a description, the compiler used, and a brief modification history of the program.
+Next are the includes (header files), the using namespace std;, the two global variables,
+which are used to define the maximum length of each name and the number of names that
+will be used. The function prototypes follow, of which there are 12. The main() function
+is then opened, and the varibles used within main() are defined.
+
+Variables in main():
+Three char arrays, used as the names for the three files.
+Two more char arrays, used as arguments when calling UserInputFileName() to define
+whether or not it should say "Input" or "output".
+Three fstream variables, one for the input file and two for the output files.
+A 2d char array for holding the names in the original order.
+A 2d char array for holding the names sorted by length.
+A 2d char array for holding the alphabetically sorted names.
+(Each of the three 2d char arrays above have
+parameters defined by the two global variables.)
+An int array for holding the order of the names,
+which changes each time the names are sorted.
+
+Still within main():
+CStringArrayInitializer() is called three times, once for each 2d char array,
+to fill most positions of each with spaces, and the rest with NULL characters.
+The user then is asked to input three file names, and each is specified.
+main() tries to open the input file, and, if successful, continues with the
+primary objectives.
+The names are inputted from the provided file into the 2d char array using FileInput(),
+and are printed to the console using PrintNames().
+The names are sorted into the lengthsortednames 2d char array using LengthSort().
+
+LengthSort(const char names[][NAME_LENGTH],
+char sortednames[][NAME_LENGTH], int order[]):
+In this function, the lengths of each name is stored in "lengths", an int array, using
+"tempname", a 1d char array, as a go-between for "names", the 2d char array,
+and LengthOfCString(), which returns the length of a 1d char array.
+The "sortednames" 2d char array is then copied from the "names" 2d char array.
+SelectionSort() is called, which uses the "lengths", "sortednames", and "order" variables.
+
+SelectionSort(int lengths[], char sortednames[][NAME_LENGTH], int order[]):
+This function is a heavily edited version of a selection sort function in the textbook
+"Starting out With C++: From Control Structures through Objects" (8th Ed.) by Tony Gaddis.
+This function starts with the first length and compares it to each of the next lengths.
+The so-called scan finds the smallest length, and switches it with the first length.
+Then the function scans for the second shortest length and switches it with the second
+length, and so on. Whenever a switch happens, the names and order values that correspond
+to the lengths are also switched.
+
+Back in main():
+PrintNames() is called twice to print the length-sorted names to console and output file.
+AlphaBubbleSort() is called, using lengthsortednames as the list of names to be sorted.
+
+AlphaBubbleSort():
+Compares each name with the next, switches if necessary, then continues to the next pair.
+The process repeats until all the names are sorted alphabetically.
+Uses CompareCStrings() to compare the first name with the next, and returns a bool.
+
+Back in main():
+The alphabetically sorted names are printed to the console and the second output file, 
+and the program ends.
